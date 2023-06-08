@@ -4,6 +4,18 @@ body{
     background-color: #000801;
 }
 
+.main-title{
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.inputContainer{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
 
 .background-img{
     position: absolute;
@@ -18,3 +30,12 @@ body{
     color: white;
 }
 
+#add-known{
+    margin-bottom: 10px;
+}
+
+.input{
+    border: rgb(82, 82, 82) solid 2px;
+    border-radius: 5px;
+    background-color: rgb(46, 46, 46);
+}

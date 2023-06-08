@@ -101,7 +101,7 @@ function AddKnown() {
   </select>
 </td>
 <td>
-  <button onclick="DelKnown(event)">-</button>
+  <button onclick="DelKnown(event)" class="btn btn-danger">-</button>
 </td>`;
   tbody.appendChild(trow);
   known.push(new KnownInfo(nRows, "V", "otap", 0, "m^3"));
