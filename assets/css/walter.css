@@ -1,0 +1,9 @@
+body{
+    height: 100%;
+    width: 100%;
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FVOdrU34CZCk%2Fmaxresdefault.jpg&f=1&nofb=1');
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: white;
+    font-size: large;
+}

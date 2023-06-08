@@ -1,0 +1,20 @@
+body{
+    height: 100%;
+    width: 100%;
+    background-color: #000801;
+}
+
+
+.background-img{
+    position: absolute;
+    left: 15%;
+    height: 50%;
+    width: 100%;
+    font-size: 100px;
+    background-position: center;
+    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic1.srcdn.com%2Fwordpress%2Fwp-content%2Fuploads%2F2019%2F01%2FBreaking-Bad-Movie-Characters.jpg&f=1&nofb=1");
+    background-repeat: no-repeat;
+    text-align: center;
+    color: white;
+}
+
