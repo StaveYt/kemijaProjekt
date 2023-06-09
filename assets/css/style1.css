@@ -18,16 +18,18 @@ body{
 }
 
 .background-img{
+    display: block;
     position: absolute;
-    left: 15%;
-    height: 50%;
+    height: 100%;
     width: 100%;
-    font-size: 100px;
-    background-position: center;
+    
+    background-image: linear-gradient(to bottom, #511FED,#2e2e2e00 75%);
+    /* background-position: center;
     background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic1.srcdn.com%2Fwordpress%2Fwp-content%2Fuploads%2F2019%2F01%2FBreaking-Bad-Movie-Characters.jpg&f=1&nofb=1");
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
     text-align: center;
     color: white;
+    z-index:1;
 }
 
 #add-known{
@@ -38,4 +40,14 @@ body{
     border: rgb(82, 82, 82) solid 2px;
     border-radius: 5px;
     background-color: rgb(46, 46, 46);
+    
+}
+
+.brand-name{
+    z-index:2;
+    font-size: 100px;
+    margin-top: 20px;
+    text-shadow: #000801 1px 3px;
+    color:whitesmoke;
+    font-family: "Lucida console";
 }
