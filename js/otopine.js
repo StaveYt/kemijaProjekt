@@ -70,7 +70,7 @@ function AddKnown() {
   let trow = document.createElement("tr");
   trow.setAttribute("id", nRows);
   trow.innerHTML = `  <td>
-  <select onchange="SymbolChange(event)">
+  <select class="input-select" onchange="SymbolChange(event)">
     <option value="V">V</option>
     <option value="D">ρ</option>
     <option value="n">n</option>
@@ -84,17 +84,17 @@ function AddKnown() {
   </select>
 </td>
 <td>
-  <select onchange="ChemChange(event)">
+  <select class="input-select" onchange="ChemChange(event)">
     <option value="otap">otap</option>
     <option value="otv">otv</option>
     <option value="otp">otp</option>
   </select>
 </td>
 <td>
-  <input onchange="QuanChange(event)" type="number">
+  <input class="input" onchange="QuanChange(event)" type="number">
 </td>
 <td>
-  <select onchange="UnitChange(event)">
+  <select class="input-select" onchange="UnitChange(event)">
     <option value="m^3">m^3</option>
     <option value="cm^3">cm^3</option>
     <option value="dm^3">dm^3</option>

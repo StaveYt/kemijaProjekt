@@ -12,7 +12,7 @@
         },
         {
             "name": "Helium",
-            "boil": 4.003,
+            "Ar": 4.003,
             "number": 2,
             "period": 1,
             "phase": "Gas",
@@ -837,7 +837,7 @@
         {
             "name": "Polonij",
             "Ar": 209,
-            "number": 83,
+            "number": 84,
             "period": 6,
             "phase": "Solid",
             "symbol": "Po",
@@ -1185,5 +1185,8 @@
             "xpos": 18,
             "shells": [2,8,18,32,32,18,8]
         }
-    ]
+    ],
+    "nonmetals":[1,2,6,7,8,9,15,16,17,18,10,34,35,36,53,54,86,118],
+    "halfmetals":[5,14,32,33,51,52,84,85],
+    "metals":[]
 }
