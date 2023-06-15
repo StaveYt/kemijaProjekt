@@ -34,7 +34,7 @@ let symbols = [
   },
   {
     symbol: "c",
-    units: ["mol/L", "mol/dm^3"],
+    units: ["mol/L","mmol/L"],
     varied: false
   },
   {
@@ -185,37 +185,16 @@ function dCalc(m, v) {
   return m / v;
 }
 
+// function OtpCalcBtn(){
+//   if(document.getElementById("formOtapInp").value == "" || document.getElementById("formOtvInp").value==""){
+//     alert("Ispunite sva polja za formule")
+//   }else{
+//     Calc()
+//   }
+// }
+
 function CalcSameData(data, chem, type){
-  for(const prop in chem){
-    if(typeof chem[prop] == "object"){
-      switch(prop){
-        case "V":
-          if(chem[prop].unit=="cm^3"){
-            chem[prop].quantity/=1000
-            chem[prop].unit="dm^3"
-          }else if(chem[prop].unit=="m^3"){
-            chem[prop].quantity*=1000
-            chem[prop].unit="dm^3"
-          }
-          break;
-        case "m":
-          if(chem[prop].unit=="mg"){
-            chem[prop].quantity/=1000
-            chem[prop].unit="g"
-          }else if(chem[prop].unit=="dg"){
-            chem[prop].quantity/=10
-            chem[prop].unit="g"
-          }else if(chem[prop].unit=="dag"){
-            chem[prop].quantity*=10
-            chem[prop].unit="g"
-          }else if(chem[prop].unit=="kg"){
-            chem[prop].quantity*=1000
-            chem[prop].unit="g"
-          }
-          break;
-      }
-    }
-  }
+  
   console.log(chem)
   for(let i = 0; i<3; i++){
     if(chem.m!=0){
@@ -396,14 +375,14 @@ function CalcSameData(data, chem, type){
               data.otv.V=new KnownInfo(nRows,"n","otv",bV,"g")
               nRows++
             }
-            data.otv.phi=new KnownInfo(nRows,"w","otv",bPhi*100,"%")
+            data.otv.phi=new KnownInfo(nRows,"phi","otv",bPhi*100,"%")
             nRows++
           }else{
             if(data.otap.V==0){
               data.otap.V=new KnownInfo(nRows,"n","otap",bV,"g")
               nRows++
             }
-            data.otap.phi=new KnownInfo(nRows,"w","otap",bPhi*100,"%")
+            data.otap.phi=new KnownInfo(nRows,"phi","otap",bPhi*100,"%")
             nRows++
           }
         }else{
@@ -489,6 +468,7 @@ function CalcSameData(data, chem, type){
 }
 
 function CalcAllData(data){
+  
   if(data.ext.b==0&&data.otap.m!=0&&data.otv.n!=0){
     let motap = data.otap.m.quantity/1000
     let b = bCalc(data.otv.n.quantity, motap)
@@ -511,7 +491,7 @@ function CalcAllData(data){
     }
   }
   if(data.ext.c==0&&data.otp.D!=0&&data.otv.M!=0&&data.otv.w!=0){
-    let c = (data.otp.D.quantity*data.otv.w.quantity*1000)/data.otv.M.quantity
+    let c = (data.otp.D.quantity*data.otv.w.quantity*10)/data.otv.M.quantity
     data.ext.c=new KnownInfo(nRows,"c","ext",c,"mol/L")
     nRows++
     changed = true
@@ -528,7 +508,7 @@ function OutputToTable(data){
     subtitle.innerText= id==0?"Otopljena Tvar":id==1?"Otapalo":id==2?"Otopina":"Koncentracija"
 
     div.appendChild(subtitle)
-    div.innerHTML+=`<table id="${id}">
+    div.innerHTML+=`<table class="table table-dark" id="${id}">
     <thead>
       <th>Podatak</th>
       <th>Količina</th>
@@ -542,7 +522,7 @@ function OutputToTable(data){
 
     for(let prop in el){
       let tr = document.createElement("tr")
-      if(el[prop] != 0 && !(prop=="M"&&id==2)){
+      if(el[prop] != 0 && !(prop=="M"&&id==2) && el[prop]!=Infinity){
         tr.innerHTML+=`<td>${prop}</td>
         <td>
           ${el[prop].quantity}
@@ -558,13 +538,45 @@ function OutputToTable(data){
     container.appendChild(div)
   })
 }
-
+function ConvertData(chem){
+  for(const prop in chem){
+    if(typeof chem[prop] == "object"){
+      switch(prop){
+        case "V":
+          if(chem[prop].unit=="cm^3"){
+            chem[prop].quantity/=1000
+            chem[prop].unit="dm^3"
+          }else if(chem[prop].unit=="m^3"){
+            chem[prop].quantity*=1000
+            chem[prop].unit="dm^3"
+          }
+          break;
+        case "m":
+          if(chem[prop].unit=="mg"){
+            chem[prop].quantity/=1000
+            chem[prop].unit="g"
+          }else if(chem[prop].unit=="dg"){
+            chem[prop].quantity/=10
+            chem[prop].unit="g"
+          }else if(chem[prop].unit=="dag"){
+            chem[prop].quantity*=10
+            chem[prop].unit="g"
+          }else if(chem[prop].unit=="kg"){
+            chem[prop].quantity*=1000
+            chem[prop].unit="g"
+          }
+          break;
+      }
+    }
+  }
+}
 function Calc() {
 
   let formulaOtapStr = document.getElementById("formOtapInp").value
   let formulaOtvStr = document.getElementById("formOtvInp").value
   let container = document.getElementById("calculated")
   let button = document.getElementById("calcBtn")
+  let plinCheck = document.getElementById("plin")
   container.removeChild(button)
   let otap = {
     V:0,
@@ -606,7 +618,8 @@ function Calc() {
     len: known.length,
   };
 
-  if (formulaOtapStr != "/") {
+  
+  if (formulaOtapStr != "") {
     let M = CalcM(formulaOtapStr)
     data.otap.M = new KnownInfo(nRows,"M","otap",M,"g/mol"); 
     nRows++
@@ -614,7 +627,7 @@ function Calc() {
     let M = prompt("Unesite molarnu masu otapala, ako je nemate upišite ne")
     if(M!="ne"){data.otap.M = new KnownInfo(nRows,"M","otap",M,"g/mol"); nRows++}
   }
-  if (formulaOtvStr != "/") { 
+  if (formulaOtvStr != "") { 
     data.otv.M = CalcM(formulaOtvStr);
     data.otv.M = new KnownInfo(nRows,"M","otv",M,"g/mol"); 
     nRows++
@@ -627,8 +640,12 @@ function Calc() {
     console.log(el)
     switch (el.symbol) {
       case "V":
-       
-        if (el.chem == "otap") { data.otap.V = el; }
+        if (el.chem == "otap") { 
+          if(plinCheck.checked){
+            data.otp.V = el;
+          }
+          data.otap.V = el; 
+        }
         else if (el.chem == "otv") { data.otv.V = el; }
         else { data.otp.V = el; }
         break;
@@ -670,7 +687,22 @@ function Calc() {
         break;
     }
   });
-
+  
+  ConvertData(otv)
+  ConvertData(otap)
+  ConvertData(otp)
+  for(const prop in data.ext){
+    if(typeof data.ext[prop] == "object"){
+      switch(prop){
+        case "c":
+          if(data.ext[prop].unit=="mmol/L"){
+            data.ext[prop].quantity/=1000
+            data.ext[prop].unit="mol/L"
+          }
+          break;
+      }
+    }
+  }
   for(let i = 0; i< 3; i++){
     CalcSameData(data,data.otap,"otap")
     CalcSameData(data,data.otv,"otv")

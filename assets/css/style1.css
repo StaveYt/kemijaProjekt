@@ -25,9 +25,6 @@ body{
     width: 100%;
     
     background-image: linear-gradient(to bottom, #511FED,#2e2e2e00 75%);
-    /* background-position: center;
-    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic1.srcdn.com%2Fwordpress%2Fwp-content%2Fuploads%2F2019%2F01%2FBreaking-Bad-Movie-Characters.jpg&f=1&nofb=1");
-    background-repeat: no-repeat; */
     text-align: center;
     color: white;
     z-index:1;

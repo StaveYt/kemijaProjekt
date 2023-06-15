@@ -35,7 +35,7 @@
   </nav>
   <div class="container" style="color:white;">
     <h1 class="main-title">Kalkultor za otopine</h1>
-    <p>Unesite kemijske formule za otapalo i otopljenu tvar. Ako ga mu ne znate formulu stavite /.</p>
+    <p>Unesite kemijske formule za otapalo i otopljenu tvar.</p>
     <p> Kliknite + za dodavat poznate podatke. Ako se podatak odnosi na otopljenu tvar koristite otv, ako se odnosi na otapalo otap, ako se odnosi na otopinu koristite, otp</p>
     <p></p>
     <div id="known">
@@ -47,6 +47,8 @@
       <div class="inputContainer">
         <label for="otv">Formula Otopljene tvari (otv)</label>
         <input class="input" id="formOtvInp">
+        <input id="plin" type="checkbox">
+        <label for="plin">Plin</label>
       </div>
 
       <button id="add-known" class="btn btn-success" onclick="AddKnown()">+</button>
